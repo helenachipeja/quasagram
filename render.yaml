@@ -22,7 +22,4 @@ services:
 databases:
   - name: quasagram-db
     plan: free
-    config:
-      user: helenachipeja
-      password: daelen08
-      database: quasagram_db
+
