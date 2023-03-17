@@ -1,19 +1,23 @@
-
+import MainLayout from 'layouts/MainLayout.vue'
+import PageHome from 'pages/PageHome.vue'
+import PageCamera from 'pages/PageCamera.vue'
+import Error404 from 'pages/Error404.vue'
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
     children: [
-      { path: '', component: () => import('pages/PageHome.vue') },
-      { path: '/camera', component: () => import('pages/PageCamera.vue') }
+      { path: '', component: PageHome },
+      { path: '/camera', component: PageCamera }
     ]
-  },
+  }
+,
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '*',
-    component: () => import('pages/Error404.vue')
+    component: Error404
   }
 ]
 
