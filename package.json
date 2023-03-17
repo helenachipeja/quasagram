@@ -9,7 +9,7 @@
     "build": "cyclic build",
     "start": "cyclic start",
     "test": "jest",
-    "deploy":""
+    "deploy": "cyclic deploy"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
