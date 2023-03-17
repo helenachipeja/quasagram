@@ -6,9 +6,10 @@
   "author": "helenachipeja<helenaachipeja@gmail.com",
   "private": true,
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "cyclic build",
+    "start": "cyclic start",
     "test": "jest",
-    "deploy": "yarn render-deploy"
+    "deploy":""
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
