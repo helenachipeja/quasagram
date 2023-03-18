@@ -8,8 +8,7 @@
   "scripts": {
     "build": "cyclic build",
     "start": "cyclic start",
-    "test": "jest",
-    "deploy": "cyclic deploy"
+    "test": "jest"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

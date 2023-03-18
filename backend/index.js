@@ -7,13 +7,16 @@ app.get('/posts', (request, response) => {
     caption:'Golden Gate Bridge',
     location:'San Francisco'
   },
+
+
+
 {
   caption:'London Eye',
     location:'London'
   }]
-  response.send(posts)
-
 })
 
-app.listen(3000)
+
+   //app.listen(process.env.PORT || 3000);
+
 

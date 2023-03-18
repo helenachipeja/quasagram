@@ -1,19 +1,12 @@
-const express = require('express')
-const app = express()
+
+const http = require('http');
+const app = require('./index');
+
+const port = process.env.PORT || 4000;
+const server = http.createServer(app);
 
 
-app.get('/posts', (request, response) => {
-  let posts = [{
-    caption:'Golden Gate Bridge',
-    location:'San Francisco'
-  },
-{
-  caption:'London Eye',
-    location:'London'
-  }]
-  response.send(posts)
-
-})
-
-app.listen(3000)
+server.listen(port, () => {
+  console.log(`Started on port ${port}`);
+});
 
