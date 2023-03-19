@@ -59,6 +59,7 @@
     </div>
     <div class="row justify-center q-mt-lg">
      <q-btn
+     @click="addPost()"
      color="primary"
      label="Post Image"
      rounded
@@ -164,7 +165,7 @@ export default {
         let apiUrl = ` https://geocode.xyz/${ position.coords.latitude},${position.coords.longitude}?json=1`
        this.$axios.get(apiUrl).then(result =>{
 
-        this.locationSucess(result)
+        this.locationSuccess(result)
        }).catch(err =>{
         this.locationError
        })
@@ -186,8 +187,22 @@ export default {
 
        })
        this.locationLoading = false
-      }
+      },
+      addPost(){
+        let formDate = new FormData()
+        FormData.append('id', this.post.id)
+        FormData.append('caption', this.post.caption)
+        FormData.append('location', this.post.location)
+        FormData.append('date', this.post.date)
+        FormData.append('file', this.post.photo, this.post.id + '.png')
 
+        this.$axios.post('${ process.env.API }/createPost', formData).then(response =>{
+          console.log('response: ', response)
+        }).catch(err => {
+          console.log('err: ', err)
+        })
+
+        }
     },
 
   mounted(){
