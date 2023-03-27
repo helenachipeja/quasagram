@@ -2,7 +2,7 @@ const express = require('express')
 const admin = require('firebase-admin');
 let inspect = require('util').inspect;
 let Busboy = require('busboy');
-const app = express()
+const app = express();
 let path = require('path')
 let os = require('os')
 let fs = require('fs')
@@ -16,7 +16,7 @@ const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: "<BUCKET_NAME>quasagram-529be.appspot.com"
+  storageBucket: "quasagram-529be.appspot.com"
 });
 
 const db = admin.firestore();
@@ -31,7 +31,7 @@ app.get('/posts', (request, response) => {
       //console.log(doc.id, '=>', doc.data());
       posts.push(doc.data());
     });
-    response.send(posts);
+    return response.send(posts);
   })
 })
 
@@ -93,7 +93,7 @@ app.post('/createPost', (request, response) => {
           date: parseInt(fields.date),
           imageUrl:'https://firebasestorage.googleapis.com/v0/b/${ bucket.name }/o/${ uploadedFile.name }?alt=media&token=${ uuid }'
         }).then(() => {
-          response.send('Post added: ' + fields.id)
+          return response.send('Post added: ' + fields.id)
         })
       }
     });
@@ -102,6 +102,13 @@ app.post('/createPost', (request, response) => {
 
    //app.listen(process.env.PORT || 3000);
    module.exports = app;
+
+   const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
+});
+
 
 
 

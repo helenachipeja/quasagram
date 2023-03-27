@@ -8,10 +8,11 @@
     autoplay
     ></video>
     <canvas
-    v-show="imageCaptured"
-     ref="canvas"
-     class="full-width"
-     height="240" />
+        v-show="imageCaptured"
+        ref="canvas"
+        class="full-width"
+        height="240"
+      ></canvas>
 
    </div>
    <div class="text-center q-pa-md">
@@ -68,13 +69,14 @@
     </div>
     <div class="row justify-center q-mt-lg">
      <q-btn
-     @click="addPost()"
+     @click="addPost"
      :disable="!post.caption || !post.photo"
      color="primary"
      label="Postar imagem"
      rounded
      unelevated
      title="Adicionar postagem"
+     icon="eva-cloud-upload-outline"
       />
     </div>
    </div>
@@ -104,6 +106,7 @@ export default {
     },
     computed:{
        locationSupported(){
+
         if('geolocation' in navigator) return true
         return false
        }
@@ -201,6 +204,15 @@ export default {
       },
       addPost(){
         $q.loading.show()
+
+        if (!this.post.photo) {
+        this.$q.dialog({
+          title: 'Error',
+          message: 'Need upload a photo!'
+        });
+        return;
+      }
+
         let formDate = new FormData()
         FormData.append('id', this.post.id)
         FormData.append('caption', this.post.caption)

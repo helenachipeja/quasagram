@@ -2,6 +2,11 @@
   <q-page class="constrain" q-pa-md>
     <div class="row q-col-gutter-lg">
       <div class="col-12 col-sm-8">
+
+      <template v-if="loadingPosts">
+          <app-spinner />
+        </template>
+
         <template v-if="!loadingPosts && posts.length">
           <q-card
       v-for="post in posts"
@@ -13,7 +18,6 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png">
           </q-avatar>
         </q-item-section>
-
         <q-item-section>
           <q-item-label class="text-bold">Helena_Chipeja</q-item-label>
           <q-item-label caption>
