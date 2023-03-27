@@ -18,10 +18,13 @@
     <q-btn
     v-if="hasCameraSupport"
     @click="captureImage"
+     :disable="imageCaptured"
     color="grey-10"
     icon="eva-camera"
     size="lg"
     round
+    title="captura"
+    aria-label="Capturar imagem"
     />
   <q-file
     v-else
@@ -35,7 +38,12 @@
       </template>
   </q-file>
     <div class="row justify-center q-ma-md">
-     <q-input v-model="post.caption" class="col col-sm-6" label="Caption" dense></q-input>
+     <q-input
+      v-model="post.caption"
+      class="col col-sm-6"
+      label="Caption *"
+      dense>
+     </q-input>
     </div>
     <div class="row justify-center q-ma-md">
      <q-input
@@ -53,6 +61,7 @@
       dense
       flat
       round
+      title="localizar"
        />
     </template>
     </q-input>
@@ -60,10 +69,12 @@
     <div class="row justify-center q-mt-lg">
      <q-btn
      @click="addPost()"
+     :disable="!post.caption || !post.photo"
      color="primary"
-     label="Post Image"
+     label="Postar imagem"
      rounded
      unelevated
+     title="Adicionar postagem"
       />
     </div>
    </div>
@@ -189,6 +200,7 @@ export default {
        this.locationLoading = false
       },
       addPost(){
+        $q.loading.show()
         let formDate = new FormData()
         FormData.append('id', this.post.id)
         FormData.append('caption', this.post.caption)
@@ -196,10 +208,24 @@ export default {
         FormData.append('date', this.post.date)
         FormData.append('file', this.post.photo, this.post.id + '.png')
 
-        this.$axios.post('${ process.env.API }/createPost', formData).then(response =>{
+        this.$axios.post('${ process.env.API }/createPostBalls', formData).then(response =>{
           console.log('response: ', response)
+          this.$router.push('/')
+          $q.notify({
+          message: 'Post created',
+          actions: [
+            { label: 'Dismiss', color: 'white' }
+          ]
+        })
+        $q.loading.hide()
         }).catch(err => {
           console.log('err: ', err)
+          this.$q.dialog({
+        title: 'Error',
+        message: 'Desculpe mas o foi possivel criar posta'
+
+       })
+       $q.loading.hide()
         })
 
         }

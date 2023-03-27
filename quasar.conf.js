@@ -99,7 +99,12 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Dialog']
+      plugins: ['Dialog',
+                'Notify',
+                'Loading',
+                {mode: 'client',
+                 src: '@/plugins/firebase.js'}
+              ]
     },
 
     // animations: 'all', // --- includes all animations
