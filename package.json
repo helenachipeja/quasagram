@@ -6,8 +6,8 @@
   "author": "helenachipeja<helenaachipeja@gmail.com",
   "private": true,
   "scripts": {
-    "build": "cyclic build",
-    "start": "cyclic start",
+    "build": "npm run build",
+    "start": "node backend/index.js",
     "test": "jest"
   },
   "dependencies": {

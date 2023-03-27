@@ -205,6 +205,33 @@ export default {
       addPost(){
         $q.loading.show()
 
+
+        if (this.post.caption && this.post.photo) {
+    // Upload image to Firebase Storage
+    let storageRef = this.$firebase.storage().ref();
+    let imageName = `${this.post.id}.${this.post.photo.name.split('.').pop()}`;
+    let imageRef = storageRef.child(`images/${imageName}`);
+    let uploadTask = imageRef.put(this.post.photo);
+
+      // Insert post into PageHome
+      uploadTask.on('state_changed',
+      null,
+      error => {
+        console.log(error);
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+          let newPost = {
+            ...this.post,
+            photo: downloadURL
+          };
+          this.$store.commit('addPost', newPost);
+          this.$router.push('/');
+        });
+      }
+    );
+  }
+
         if (!this.post.photo) {
         this.$q.dialog({
           title: 'Error',
