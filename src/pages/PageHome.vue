@@ -93,7 +93,7 @@ export default {
   data() {
     return{
       posts:[
-        /*{
+       {
           id:1,
           caption: 'Golden Gate Bridge',
           date: 1591776655504,
@@ -103,27 +103,27 @@ export default {
       },
       {
           id:2,
-          caption: 'Golden Gate Bridge',
+          caption: 'Torre Eifel',
           date: 1591776655504,
-          location: 'Maputo, Mozambique',
-          imageUrl: 'https://cdn.quasar.dev/img/parallax2.jpg'
+          location: 'Paris, France',
+          imageUrl: 'https://images.unsplash.com/photo-1568684333877-4d39f2c871c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
 
       },   {
           id:3,
-          caption: 'Golden Gate Bridge',
+          caption: 'Grilled Chicken and Pasta stock photo',
           date: 1591776655504,
-          location: 'Maputo, Mozambique',
-          imageUrl: 'https://cdn.quasar.dev/img/parallax2.jpg'
+          location: 'Italia, Mozambique',
+          imageUrl: 'https://media.istockphoto.com/id/155431280/photo/grilled-chicken-and-pasta.jpg?s=1024x1024&w=is&k=20&c=MboQgPz2B-R8ysq-Y7hI1bcsTIsi1qDhyJfpMG2Ru9g='
 
       },   {
           id:4,
-          caption: 'Golden Gate Bridge',
+          caption: 'Beach',
           date: 1591776655504,
           location: 'Maputo, Mozambique',
-          imageUrl: 'https://cdn.quasar.dev/img/parallax2.jpg'
+          imageUrl: 'https://images.unsplash.com/photo-1544298903-35eee5a95b4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=922&q=80'
 
       }
-*/
+
     ],
     loadingPosts:false
     }

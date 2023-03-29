@@ -101,9 +101,9 @@ module.exports = function (/* ctx */) {
       // Quasar plugins
       plugins: ['Dialog',
                 'Notify',
-                'Loading',
-                {mode: 'client',
-                 src: '@/plugins/firebase.js'}
+                'Loading'
+                //{mode: 'client',
+                 //src: '@/plugins/firebase.js'}
               ]
     },
 

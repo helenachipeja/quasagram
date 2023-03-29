@@ -176,42 +176,41 @@ export default {
         },{timeout: 7000})
       },
       getCityAndCountry(position){
-        let apiUrl = ` https://geocode.xyz/${ position.coords.latitude},${position.coords.longitude}?json=1`
-       this.$axios.get(apiUrl).then(result =>{
-
+        let apiUrl = `https://geocode.xyz/${ position.coords.latitude},${position.coords.longitude}?json=1`
+       this.$axios.get(apiUrl).then(result => {
         this.locationSuccess(result)
        }).catch(err =>{
         this.locationError
        })
       },
-      locationSucess(result){
+      locationSuccess(result){
         console.log(result)
         console.log(result.data)
         this.post.location = result.data.city
         if (result.data.country){
-          this.post.location += ', ${ result.data.country }'
-
+          this.post.location += ', ${result.data.country}'
         }
         this.locationLoading = false
       },
       locationError(){
        this.$q.dialog({
         title: 'Error',
-        message: 'Não encontro a sua localização'
+        message: 'Localização não encontrada',
+
 
        })
        this.locationLoading = false
       },
       addPost(){
-        $q.loading.show()
+        this.$q.loading.show()
 
 
         if (this.post.caption && this.post.photo) {
     // Upload image to Firebase Storage
-    let storageRef = this.$firebase.storage().ref();
-    let imageName = `${this.post.id}.${this.post.photo.name.split('.').pop()}`;
-    let imageRef = storageRef.child(`images/${imageName}`);
-    let uploadTask = imageRef.put(this.post.photo);
+   // let storageRef = this.$firebase.storage().ref();
+   // let imageName = `${this.post.id}.${this.post.photo.name.split('.').pop()}`;
+    //let imageRef = storageRef.child(`images/${imageName}`);
+    //let uploadTask = imageRef.put(this.post.photo);
 
       // Insert post into PageHome
       uploadTask.on('state_changed',
@@ -226,7 +225,7 @@ export default {
             photo: downloadURL
           };
           this.$store.commit('addPost', newPost);
-          this.$router.push('/');
+          this.$router.push('/').catch(() => {});
         });
       }
     );
@@ -240,31 +239,31 @@ export default {
         return;
       }
 
-        let formDate = new FormData()
-        FormData.append('id', this.post.id)
-        FormData.append('caption', this.post.caption)
-        FormData.append('location', this.post.location)
-        FormData.append('date', this.post.date)
-        FormData.append('file', this.post.photo, this.post.id + '.png')
+        let formData = new FormData()
+        formData.append(`id`, this.post.id)
+        formData.append(`caption`, this.post.caption)
+        formData.append(`location`, this.post.location)
+        formData.append(`date`, this.post.date)
+        formData.append(`file`, this.post.photo, this.post.id + '.png')
 
         this.$axios.post('${ process.env.API }/createPostBalls', formData).then(response =>{
           console.log('response: ', response)
           this.$router.push('/')
-          $q.notify({
+          this.$q.notify({
           message: 'Post created',
           actions: [
             { label: 'Dismiss', color: 'white' }
           ]
         })
-        $q.loading.hide()
+        this.$q.loading.hide()
         }).catch(err => {
           console.log('err: ', err)
           this.$q.dialog({
-        title: 'Error',
-        message: 'Desculpe mas o foi possivel criar posta'
+        title: 'Erro',
+        message: 'Desculpe mas nao foi possivel criar posta'
 
        })
-       $q.loading.hide()
+       this.$q.loading.hide()
         })
 
         }

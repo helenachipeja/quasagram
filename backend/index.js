@@ -8,7 +8,7 @@ let os = require('os')
 let fs = require('fs')
 let UUID = require('uuid-v4')
 
-
+var server = http.createServer(app);
 /*
 config-firebase
 */
